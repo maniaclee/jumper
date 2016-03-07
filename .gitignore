@@ -14,3 +14,4 @@ target
 *.jar
 *.war
 *.ear
+*.ignore
