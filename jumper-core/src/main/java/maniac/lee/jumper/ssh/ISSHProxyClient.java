@@ -10,9 +10,7 @@ public interface ISSHProxyClient extends ISSHClient {
     /***
      * proxy the remote host
      */
-    void proxyRemote(int bindPort, String remoteHost, int remotePort) throws Exception;
-
-    void proxyRemote(String remoteHost, int remotePort) throws Exception;
+    void proxyRemote( String remoteHost, int remotePort,int bindPort) throws Exception;
 
     InetSocketAddress getProxyAddress();
 }

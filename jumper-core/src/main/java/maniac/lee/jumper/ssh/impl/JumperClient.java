@@ -11,26 +11,31 @@ import java.net.ServerSocket;
 /**
  * Created by lipeng on 15/11/3.
  */
-public class SSHProxyClient extends SSHClient implements ISSHProxyClient {
+public class JumperClient extends SSHClient implements ISSHProxyClient {
 
     InetSocketAddress proxyAddress;
 
-    public static SSHProxyClient from(SSHConfig sshConfig) throws Exception {
-        SSHProxyClient re = new SSHProxyClient();
+    public static JumperClient from(SSHConfig sshConfig) throws Exception {
+        JumperClient re = new JumperClient();
         re.setSSH(sshConfig);
         return re;
     }
 
-    public void proxyRemote(int bindPort, String remoteHost, int remotePort) throws Exception {
+    /**
+     * jump to the remote server
+     *
+     * @param remoteHost
+     * @param remotePort
+     * @param bindPort   optional,the local port that the jumper uses
+     * @throws Exception
+     */
+    @Override
+    public void proxyRemote(String remoteHost, int remotePort, int bindPort) throws Exception {
+        if (bindPort <= 0)
+            bindPort = findUnusedPort();
         int assigned_port = getSession().setPortForwardingL(bindPort, remoteHost, remotePort);
         proxyAddress = new InetSocketAddress("127.0.0.1", assigned_port);
     }
-
-    @Override
-    public void proxyRemote(String remoteHost, int remotePort) throws Exception {
-        proxyRemote(findUnusedPort(), remoteHost, remotePort);
-    }
-
 
     public InetSocketAddress getProxyAddress() {
         return proxyAddress;
