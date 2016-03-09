@@ -1,9 +1,9 @@
-package psyco.jumper.ssh.impl;
+package maniac.lee.jumper.ssh.impl;
 
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
-import psyco.jumper.ssh.ISSHClient;
-import psyco.jumper.ssh.SSHConfig;
+import maniac.lee.jumper.ssh.ISSHClient;
+import maniac.lee.jumper.ssh.SSHConfig;
 
 import java.util.Hashtable;
 

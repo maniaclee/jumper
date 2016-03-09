@@ -1,4 +1,4 @@
-package psyco.jumper.ssh;
+package maniac.lee.jumper.ssh;
 
 import java.io.Serializable;
 

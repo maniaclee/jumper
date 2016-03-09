@@ -1,8 +1,8 @@
-package psyco.jumper.ssh.impl;
+package maniac.lee.jumper.ssh.impl;
 
 
-import psyco.jumper.ssh.ISSHProxyClient;
-import psyco.jumper.ssh.SSHConfig;
+import maniac.lee.jumper.ssh.ISSHProxyClient;
+import maniac.lee.jumper.ssh.SSHConfig;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -21,15 +21,16 @@ public class SSHProxyClient extends SSHClient implements ISSHProxyClient {
         return re;
     }
 
-    public void setProxySSH(int bindPort, String remoteHost, int remotePort) throws Exception {
+    public void proxyRemote(int bindPort, String remoteHost, int remotePort) throws Exception {
         int assigned_port = getSession().setPortForwardingL(bindPort, remoteHost, remotePort);
         proxyAddress = new InetSocketAddress("127.0.0.1", assigned_port);
     }
 
     @Override
-    public void setProxySSH(String remoteHost, int remotePort) throws Exception {
-        setProxySSH(findUnusedPort(), remoteHost, remotePort);
+    public void proxyRemote(String remoteHost, int remotePort) throws Exception {
+        proxyRemote(findUnusedPort(), remoteHost, remotePort);
     }
+
 
     public InetSocketAddress getProxyAddress() {
         return proxyAddress;

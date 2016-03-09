@@ -1,12 +1,12 @@
-package psyco.jumper.core;
+package maniac.lee.jumper.core;
 
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextClosedEvent;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import psyco.jumper.ssh.SSHConfig;
-import psyco.jumper.ssh.impl.SSHProxyClient;
+import maniac.lee.jumper.ssh.SSHConfig;
+import maniac.lee.jumper.ssh.impl.SSHProxyClient;
 
 import javax.sql.DataSource;
 import java.net.InetSocketAddress;
@@ -38,7 +38,7 @@ public class DataSourceSSHFactoryBean implements FactoryBean<DataSource>, Applic
         System.out.println("fuck:\t" + bindPort);
         client.start();
         if (bindPort > 0)
-            client.setProxySSH(bindPort, formatIp(addr.getHostName()), addr.getPort());
+            client.proxyRemote(bindPort, formatIp(addr.getHostName()), addr.getPort());
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(jdbcDriver);
         dataSource.setPassword(password);

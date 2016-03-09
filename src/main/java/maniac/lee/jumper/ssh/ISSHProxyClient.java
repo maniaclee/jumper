@@ -1,4 +1,4 @@
-package psyco.jumper.ssh;
+package maniac.lee.jumper.ssh;
 
 import java.net.InetSocketAddress;
 
@@ -15,8 +15,8 @@ public interface ISSHProxyClient extends ISSHClient {
      * @param remotePort
      * @return
      */
-    void setProxySSH(int bindPort, String remoteHost, int remotePort) throws Exception;
-    void setProxySSH(String remoteHost, int remotePort) throws Exception;
+    void proxyRemote(int bindPort, String remoteHost, int remotePort) throws Exception;
+    void proxyRemote(String remoteHost, int remotePort) throws Exception;
 
     InetSocketAddress getProxyAddress();
 }
