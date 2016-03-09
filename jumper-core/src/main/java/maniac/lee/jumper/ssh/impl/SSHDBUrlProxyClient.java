@@ -22,15 +22,14 @@ public class SSHDBUrlProxyClient extends SSHProxyClient {
         return sshdbUrlProxyClient;
     }
 
-    //jdbc:mysql://localhost:3366/PCTChannel?user=cobain.li&password=dp!@4REjjBdcz
+
+
     public String setUpDbUrl(String url) throws Exception {
         Matcher matcher = p.matcher(url);
         if (matcher.find()) {
             String ip = matcher.group(1);
             String port = matcher.group(2);
             assert StringUtils.isNoneBlank(ip) && StringUtils.isNoneBlank(port);
-            System.out.println(ip);
-            System.out.println(port);
             proxyRemote(ip, Integer.parseInt(port));
             InetSocketAddress proxyAddress = getProxyAddress();
             url = replace(url, matcher.start(2), matcher.end(2), String.valueOf(proxyAddress.getPort()));

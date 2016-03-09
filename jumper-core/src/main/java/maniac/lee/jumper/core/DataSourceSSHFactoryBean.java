@@ -1,12 +1,12 @@
 package maniac.lee.jumper.core;
 
+import maniac.lee.jumper.ssh.SSHConfig;
+import maniac.lee.jumper.ssh.impl.SSHProxyClient;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextClosedEvent;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import maniac.lee.jumper.ssh.SSHConfig;
-import maniac.lee.jumper.ssh.impl.SSHProxyClient;
 
 import javax.sql.DataSource;
 import java.net.InetSocketAddress;
@@ -35,7 +35,6 @@ public class DataSourceSSHFactoryBean implements FactoryBean<DataSource>, Applic
         if (addr == null)
             throw new Exception("invalid url");
         client = SSHProxyClient.from(sshConfig);
-        System.out.println("fuck:\t" + bindPort);
         client.start();
         if (bindPort > 0)
             client.proxyRemote(bindPort, formatIp(addr.getHostName()), addr.getPort());
