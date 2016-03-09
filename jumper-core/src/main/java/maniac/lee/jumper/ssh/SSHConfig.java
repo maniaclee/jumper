@@ -8,6 +8,7 @@ import java.io.Serializable;
 public class SSHConfig  implements Serializable{
 
     private String host;
+    private int port;
     private String user;
     private String password;
     private String rsaFilePath;
@@ -15,11 +16,20 @@ public class SSHConfig  implements Serializable{
     public SSHConfig() {
     }
 
-    public SSHConfig(String host, String user, String password, String rsaFilePath) {
+    public SSHConfig(String host, int port, String user, String password, String rsaFilePath) {
         this.host = host;
+        this.port = port;
         this.user = user;
         this.password = password;
         this.rsaFilePath = rsaFilePath;
+    }
+
+    public int getPort() {
+        return port;
+    }
+
+    public void setPort(int port) {
+        this.port = port;
     }
 
     public String getHost() {

@@ -5,6 +5,5 @@ package maniac.lee.jumper.ssh;
  */
 public interface ISSHClient extends IClient {
 
-    void setSSH(String sshHost, String userName, String password, String rsaFilePath) throws Exception;
     void setSSH(SSHConfig sshConfig) throws Exception;
 }

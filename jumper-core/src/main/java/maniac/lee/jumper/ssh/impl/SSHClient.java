@@ -12,30 +12,17 @@ import java.util.Hashtable;
  */
 public class SSHClient implements ISSHClient {
     Session session;
-    String ssh_user;
-    String ssh_server;
-    String ssh_password;
-    String ssh_ras_file_path;
 
-    public void setSSH(String sshHost, String userName, String password, String rsaFilePath) throws Exception {
-        this.ssh_server = sshHost;
-        this.ssh_user = userName;
-        this.ssh_password = password;
-        this.ssh_ras_file_path = rsaFilePath;
-
+    @Override
+    public void setSSH(SSHConfig sshConfig) throws Exception {
         final JSch jsch = new JSch();
-        session = jsch.getSession(ssh_user, ssh_server, 22);
-        session.setPassword(ssh_password);
+        session = jsch.getSession(sshConfig.getUser(), sshConfig.getHost(), sshConfig.getPort() <= 0 ? 22 : sshConfig.getPort());
+        session.setPassword(sshConfig.getPassword());
 
         final Hashtable config = new Hashtable();
         config.put("StrictHostKeyChecking", "no");
         session.setConfig(config);
-        jsch.addIdentity(ssh_ras_file_path);
-    }
-
-    @Override
-    public void setSSH(SSHConfig sshConfig) throws Exception {
-        setSSH(sshConfig.getHost(),sshConfig.getUser(),sshConfig.getPassword(),sshConfig.getRsaFilePath());
+        jsch.addIdentity(sshConfig.getRsaFilePath());
     }
 
     public void start() throws Exception {
