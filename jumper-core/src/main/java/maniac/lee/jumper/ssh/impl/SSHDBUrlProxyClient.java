@@ -2,7 +2,6 @@ package maniac.lee.jumper.ssh.impl;
 
 import maniac.lee.jumper.ssh.SSHConfig;
 import org.apache.commons.lang3.StringUtils;
-import org.junit.Test;
 
 import java.net.InetSocketAddress;
 import java.util.regex.Matcher;
@@ -41,12 +40,5 @@ public class SSHDBUrlProxyClient extends SSHProxyClient {
     private String replace(String s, int start, int end, String to) {
         return s.substring(0, start) + to + s.substring(end);
     }
-
-    @Test
-    public void sdf() throws Exception {
-        String s = "jdbc:mysql://10.1.1.3:3366/PCTChannel?user=cobain.li&password=dp!@4REjjBdcz";
-        System.out.println(setUpDbUrl(s));
-    }
-
 
 }
