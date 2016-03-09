@@ -11,6 +11,7 @@
     <modules>
         <module>jumper-core</module>
         <module>jumper-spring</module>
+        <module>jumper-test</module>
     </modules>
 
 
