@@ -25,6 +25,12 @@ public class Config {
         return JSON.parseObject(IOUtils.toString(getClass().getClassLoader().getResourceAsStream("json.ignore")), SSHConfig.class);
     }
 
+    /***
+     * demo for
+     * @param sshConfig
+     * @return
+     * @throws Exception
+     */
     @Bean
     public JumperFactoryBean sshdbUrlProxyClient(SSHConfig sshConfig) throws Exception {
         return JumperFactoryBean.createDataSourceJumperProxy(sshConfig);
@@ -32,13 +38,23 @@ public class Config {
 
 
     @Bean
-    public DataSource dataSource(Jumper jumper) throws Exception {
+    public DataSource dataSource1(Jumper jumper) throws Exception {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
         /** let Jumper to delegate the url */
         dataSource.setUrl(jumper.setUpDbUrl("jdbc:mysql://10.1.101.158:3306/PCTChannel?user=cobain.li&password=dp!@4REjjBdcz"));
         return dataSource;
     }
+
+//    @Bean
+//    public JumperDataSourceFactoryBean dataSource() throws IOException {
+//        JumperDataSourceFactoryBean fb = new JumperDataSourceFactoryBean();
+//        fb.setPassword("dp!@W1q3QcIiR");
+//        fb.setUser("cobain.li");
+//        fb.setSshConfig(sshConfig());
+//        fb.setUrl("jdbc:mysql://10.1.110.108:3306/MOPay");
+//        return fb;
+//    }
 
     @Bean
     public JdbcTemplate jdbcTemplate(DataSource dataSource) {
