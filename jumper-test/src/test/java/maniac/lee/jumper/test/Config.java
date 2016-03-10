@@ -22,11 +22,19 @@ public class Config {
 
     @Bean
     public SSHConfig sshConfig() throws IOException {
+        //        SSHConfig sshConfig = new SSHConfig();
+        //        sshConfig.setHost("192.168.2.2");//跳板机ip
+        //        sshConfig.setPort(33);//跳板机port
+        //        sshConfig.setUser("user");
+        //        sshConfig.setPassword("pwd");
+        //        sshConfig.setRsaFilePath("~/.ssh/rsa");
+        //        return sshConfig;
         return JSON.parseObject(IOUtils.toString(getClass().getClassLoader().getResourceAsStream("json.ignore")), SSHConfig.class);
     }
 
     /***
      * demo for
+     *
      * @param sshConfig
      * @return
      * @throws Exception
@@ -46,15 +54,15 @@ public class Config {
         return dataSource;
     }
 
-//    @Bean
-//    public JumperDataSourceFactoryBean dataSource() throws IOException {
-//        JumperDataSourceFactoryBean fb = new JumperDataSourceFactoryBean();
-//        fb.setPassword("dp!@W1q3QcIiR");
-//        fb.setUser("cobain.li");
-//        fb.setSshConfig(sshConfig());
-//        fb.setUrl("jdbc:mysql://10.1.110.108:3306/MOPay");
-//        return fb;
-//    }
+    //        @Bean
+    //        public JumperDataSourceFactoryBean dataSource() throws IOException {
+    //            JumperDataSourceFactoryBean fb = new JumperDataSourceFactoryBean();
+    //            fb.setPassword("dp!@W1q3QcIiR");
+    //            fb.setUser("cobain.li");
+    //            fb.setSshConfig(sshConfig());
+    //            fb.setUrl("jdbc:mysql://10.1.110.108:3306/MOPay");
+    //            return fb;
+    //        }
 
     @Bean
     public JdbcTemplate jdbcTemplate(DataSource dataSource) {
